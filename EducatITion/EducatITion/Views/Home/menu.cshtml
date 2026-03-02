@@ -1,0 +1,125 @@
+@model MenuViewModel
+
+<html>
+	<head>
+	  <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <link rel="stylesheet" href="~/css/menu.css">
+	  <link rel="stylesheet" href="~/css/styles.css">
+	  <link rel="stylesheet" href="~/css/modalStyles.css">
+	  <title>@Model.Title</title>
+	</head>
+<body>
+	<div class='main-div'>
+		<div class="left-part">
+			<img class="menu-background" src="~/imgs/menu.png">
+			<div class="menu">
+				<div class="menu-icons">
+					<a href="@Url.Action("Index", "Home")"><img class='icon' src="~/imgs/icons/house.png"></a>
+					<a href="@Url.Action("Catalogue", "Home")"><img class='icon' src="~/imgs/icons/catalog.png"></a>
+				</div>
+				<img class="user-photo" src="~/imgs/icons/user_photo.png">
+				<div class="menu-btns">
+					<a href="@Url.Action("Menu", "Home", new {page = MenuPage.Ñourses})" class="menu-btn no-underline">@Model.MenuSectionsNames["courses"]</a>
+					<a href="@Url.Action("Menu", "Home", new {page = MenuPage.Support})" class="menu-btn no-underline">@Model.MenuSectionsNames["support"]</a>
+					<a href="@Url.Action("Menu", "Home", new {page = MenuPage.Comments})" class="menu-btn no-underline">@Model.MenuSectionsNames["comments"]</a>
+					<button class="openModal menu-btn no-underline">@Model.MenuSectionsNames["exit"]</button>
+				</div>
+			</div>
+		</div>
+		<div class='right-part'>
+			@if (Model.PageType != MenuPage.Greetings)
+			{
+				<div class="menu-logo-container">
+					<img class="menu-logo" src="~/imgs/icons/logo.png">
+					<span class="menu-logo-text">EducatITon</span>
+				</div>
+					<div class="courses-container">
+					<div class="panel">
+						<div class="content">
+							@if (Model.PageType == MenuPage.Ñourses)
+							{
+								@for (int i = 0; i < Model.CoursesTitles.Length; i++)
+								{
+									string circleCls, circleImg;
+									@if (Model.CoursesTypes[i] == CourseType.Done)
+									{
+										circleCls = "item-circle-picture-yes";
+										circleImg = "/imgs/icons/yes.png";
+									}
+									else
+									{
+										circleCls = "item-circle-picture-load";
+										circleImg = "/imgs/icons/load.png";
+									}
+
+									<div class='item'>
+										<div class='item-panel'></div>
+										<div class='item-circle'>
+											<div class='item-circle-background'></div>
+											<img class='@circleCls' src="@circleImg">
+										</div>
+										<div class='item-title'>@Model.CoursesTitles[i]</div>
+										<div class='item-price'>@Model.CoursesPrices[i]</div>
+										<div class='item-description'>@Model.CoursesDescriptions[i]</div>
+										<img class='item-image' src="@Model.CoursesImgPaths[i]">
+									</div>
+								}
+							}
+							else if(Model.PageType == MenuPage.Support)
+							{
+								<div style="text-align: center; color: white; font-size: 4vw; width: 100%; height: 100%; justify-content: center; align-items: center;">
+									@Model.MenuSectionsNames["support"]
+								</div>
+							}
+							else if (Model.PageType == MenuPage.Comments)
+							{
+								<div style="text-align: center; color: white; font-size: 4vw; width: 100%; height: 100%; justify-content: center; align-items: center;">
+									@Model.MenuSectionsNames["comments"]
+								</div>
+							}
+						</div>
+					</div>
+				</div>
+				@if (Model.Role == Role.teacher)
+				{
+					<div class='plus-container'>
+						<div class='plus-background'>
+							<img class='plus-image' src="~/imgs/icons/plus.png">
+						</div>
+					</div>
+				}
+			}
+			else
+			{
+				<div class="menu-right-logo-container">
+					<img class="menu-right-logo" src="~/imgs/icons/logo.png">
+					<span class="menu-right-logo-text">EducatITon</span>
+				</div>
+				<div class="spans-container">
+					<span class="greetings-text">@Model.GreetingInfo[0]</span>
+					<span class="common-text">@Model.GreetingInfo[1]</span>
+					<span class="common-text">@Model.GreetingInfo[2]</span>
+					<span class="common-text">@Model.GreetingInfo[3]</span>
+					<span class="common-text">@Model.GreetingInfo[4]</span>
+					<span class="author-text">@Model.GreetingInfo[5]</span>
+				</div>
+			}
+		</div>
+	</div>
+	<div id="modal" class="modal" data-width="60%" data-height="40%">
+		<div class="modal-content modal-r vertical-sb-layout">
+			<span class="exit-title">
+				@Model.AreYouSureTextPart1<br>
+				@Model.AreYouSureTextPart2
+			</span>
+			<div style="margin-top: 10%; width: 80%; height: 80%;" class="horizontal-sb-layout">
+				<a class="select-button no-underline" href="@Url.Action("Menu", "Home", new { page = MenuPage.Exit } )">@Model.ExitButtonName</a>
+				<a class="select-button no-underline" href="@Url.Action("Menu", "Home")">@Model.StayButtonName</a>
+			</div>
+		</div>
+	</div>
+
+	<script src="~/js/modalScript.js"></script>
+</body>
+</html>

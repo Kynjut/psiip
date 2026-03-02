@@ -1,0 +1,47 @@
+@using EducatITion.Models.Combined
+@model CombinedCatalogueModel
+
+<html>
+  <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="~/css/courses.css">
+	<link rel="stylesheet" href="~/css/styles.css">
+	<title>@Model.CatalogueViewModel.Title</title>
+  </head>
+  <body style='display: flex; align-items: center; justify-content: center;'>
+  <div style='display: flex; top: 5%; width: 95%; align-items: center; justify-content: space-between; position: absolute;'>
+		<img onclick="window.location.href = '/';" src="~/imgs/icons/house-black.png" style="width: 3vw; height: 3vw; display: flex; margin-left: 5%; cursor: pointer; z-index: 100;">
+		<form method="post" id="search" class="search-container">
+			<input asp-for="@Model.SearchModel.Searched" type="text" class="search-input" placeholder="@Model.CatalogueViewModel.SearchText">
+			<img src="~/imgs/icons/zoom.png" style="width: 3vw; height: 3vw; left: 90%; position: absolute; cursor: pointer;" onclick="search.submit();">		
+		</form>
+	<div>
+		<form method="post" id="sort">
+			<input type="hidden" name="sort" value="true">
+			<img sort="true" style="z-index: -1; width: 3vw; height: 3vw; display: flex; margin-right: 5%; cursor: pointer;" src="~/imgs/icons/sort.png" onclick="document.getElementById('sort').submit();">
+		</form>
+	</div>
+  </div>
+  <div class="courses-container">
+			<div class="panel">
+				<div class="content">
+				@for (int i = 0; i < Model.CatalogueViewModel.CoursesTitles.Length; i++)
+				{
+					<div class='item'>
+						<div class='item-panel'></div>
+							<div class='item-circle'>
+							<div class='item-circle-background'></div>
+							<img class='item-circle-picture-plus' src="~/imgs/icons/plus-transparent.png">
+						</div>
+						<div class='item-title'>@Model.CatalogueViewModel.CoursesTitles[i]</div>
+						<div class='item-price'>@Model.CatalogueViewModel.CoursesPrices[i]</div>
+						<div class='item-description'>@Model.CatalogueViewModel.CoursesDescriptions[i]</div>
+						<img class='item-image' src="@Model.CatalogueViewModel.CoursesImgPaths[i]">
+					</div>				  
+				}  
+				</div>
+			</div>
+		</div>
+</body>
+</html>

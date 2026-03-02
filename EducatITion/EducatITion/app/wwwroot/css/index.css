@@ -1,0 +1,299 @@
+.index-logo-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 20%; 
+	height: 25%; 
+	left: 41%; 
+}
+
+.l-btn{
+	padding: 0.7vw 1vw;
+	background: gray;
+	color: black;
+	border-radius: 12px;
+}
+
+.index-logo-text{
+	display: flex;
+	color: black;  
+	font-size: 2.4vw; 
+	font-family: 'JetBrains Mono', monospace;
+	font-weight: 800; 
+	letter-spacing: 1.5px; 
+	word-wrap: break-word;
+}
+
+.index-logo{
+	display: relative;
+	width: 20%; 
+	top: 4%; 
+	border-radius: 9999px; 
+}
+
+.right-btn-container {
+	width: 8%;
+	padding: 20px;
+	left: 20%;
+	top: 60%;
+	border: 1px solid black;
+	position: absolute;
+	transform: rotate(15deg);
+	transform-origin: 0;
+	background-color: rgb(134, 171, 207);
+	background-image: initial;
+	border-radius: 9999px;
+}
+
+.left-btn-container {
+	width: 8%;
+	padding: 20px;
+	right: 20%;
+	top: 62.5%;
+	border: 1px solid black;
+	position: absolute;
+	transform: rotate(-15deg);
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(134, 171, 207);
+	border-radius: 9999px;
+}
+
+.btn-container-text {
+	text-align: center;
+	font-size: 1.25vw;
+	color: black;
+	font-family: 'Gotham Pro';
+	word-wrap: break-word;
+	white-space: nowrap;
+}
+
+.slider-container{
+	width: 85%; 
+	height: 35%; 
+	left: 7%; 
+	top: 25%; 
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+}
+
+.slide-1{
+	width: 15%; 
+	height: 50%; 
+	left: 11%; 
+	top: 20%; 
+	position: absolute; 
+	z-index: 0;
+}
+
+.slide-2{
+	width: 20%; 
+	height: 75%; 
+	left: 20%; 
+	top: 10%; 
+	position: 
+	absolute; 
+	z-index: 1;
+}
+
+.slide-3{
+	width: 35%; 
+	height: 100%; 
+	left: 32.5%; 
+	top: 0%; 
+	position: absolute; 
+	z-index: 2;
+}
+
+.slide-4{
+	width: 20%; 
+	height: 75%; 
+	right: 20%; 
+	top: 10%; 
+	position: absolute; 
+	z-index: 1;
+}
+
+.slide-5{
+	width: 15%; 
+	height: 50%; 
+	right: 11%; 
+	top: 20%; 
+	position: absolute; 
+	z-index: 0;
+}
+
+.left-scroll{
+	width: 4.5%; 
+	height: 45%; 
+	left: 0%; 
+	top: 18%; 
+	position: absolute;
+}
+
+.right-scroll{
+	width: 4.5%; 
+	height: 45%; 
+	right: 0%; 
+	top: 18%; 
+	position: absolute;
+}
+
+.scroll-background{
+	width: 100%; height: 100%; left: 0%; top: 0%; position: absolute;
+}
+
+.scroll-arrow-left{
+	width: 32px; 
+	height: 32px; 
+	right: 20%; 
+	top: 45%; 
+	position: absolute;
+}
+
+.scroll-arrow-right{
+	width: 32px; 
+	height: 32px; 
+	left: 20%; 
+	top: 45%; 
+	position: absolute;
+}
+
+.header-icon-btn{
+	width: 4vw;  
+}
+
+.header-icon-btn-ref {
+	margin: 10%
+}
+
+.login-header-btn {
+	background-color: #F2B1D5;
+}
+
+.reg-header-btn {
+	background-color: #86ABCF;
+}
+
+.header-text-btn{
+	display: flex;
+	margin: 5%;	
+	text-align: center;
+	white-space: nowrap;
+	font-size: 1vw;
+	font-family: 'Gotham Pro', monospace; 
+	font-style: italic; 
+	color: black;
+	font-weight: 700; 
+}
+
+.header-container{
+	display: flex;
+	z-index: 1;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header-text-btns-container{
+	width: 30%;
+	height: 8%; 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.header-icon-btns-container{ 
+	width: 30%;
+	height: 8%; 
+	display: flex;
+}
+
+.course-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 67%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: black;
+	font-size: 1.4vw;
+	font-family: 'JetBrains Mono', monospace;
+	font-style: italic;
+	font-weight: 700;
+	word-wrap: break-word;
+}
+
+.course-description-container {
+	width: 60%;
+	height: 15%;
+	left: 20%;
+	top: 72%;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: black;
+	font-size: 1.1vw;
+	font-family: 'Gotham Pro', monospace;
+	font-weight: 400;
+	word-wrap: break-word;
+}
+
+.course-description-text{
+	display: flex; 
+	text-align: center;
+}
+
+.footer-background{
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	z-index: 1;
+}
+
+.footer{
+	width: 100%; 
+	height: 15%; 
+	bottom: 0px; 
+	justify-content: center;
+	align-content: center;
+	position: absolute;
+	display : flex;
+}
+
+.credits{
+	width: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	z-index: 1;
+	bottom: 15%;
+	position: absolute;
+}
+
+.credits-item{
+	color: white;
+	font-size: 1.2vw; font-family: 'Gotham Pro', monospace;
+}
+
+@font-face 
+{
+	font-family: 'Gotham Pro';
+	src: url('fonts/Gotham Pro.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+body {
+	background-image: url('../imgs/background.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+}

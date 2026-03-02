@@ -1,0 +1,174 @@
+@using EducatITion.Models.Combined
+@model CombinedIndexModel
+
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/index.css">
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="~/css/reg.css">
+    <link rel="stylesheet" href="~/css/choice.css">
+    <link rel="stylesheet" href="~/css/auth.css">
+    <link rel="stylesheet" href="~/css/modalStyles.css">
+    <title>@Model.IndexViewModel.Title</title>
+    </head>
+   <body>
+  <div class="slider-container">
+    <img class='slide-1' src="@Model.IndexViewModel.GetImgPath(0)">
+	<img class='slide-2' src="@Model.IndexViewModel.GetImgPath(1)">
+	<img class='slide-3' src="@Model.IndexViewModel.GetImgPath(2)">
+	<img class='slide-4' src="@Model.IndexViewModel.GetImgPath(3)">
+    <img class='slide-5' src="@Model.IndexViewModel.GetImgPath(4)"> 
+  </div>
+  <div class="header-container">
+	<div class="header-text-btns-container">
+        @if (Model.IndexViewModel.IsLoggedIn)
+        {
+            <a href="@Url.Action("Catalogue", "Home")" class="header-text-btn no-underline">@Model.IndexViewModel.HeaderTextBtnsNames["catalogue"]</a>
+            <a href="@Url.Action("Menu", "Home", new { page = MenuPage.Сourses })" class="header-text-btn no-underline">@Model.IndexViewModel.HeaderTextBtnsNames["courses"]</a>
+            <a href="@Url.Action("Menu", "Home", new { page = MenuPage.Support })" class="header-text-btn no-underline">@Model.IndexViewModel.HeaderTextBtnsNames["support"]</a>
+        }
+        else
+        {
+            <button onClick="openReg()" class="header-text-btn no-underline transparent-bg">@Model.IndexViewModel.HeaderTextBtnsNames["catalogue"]</button>
+            <button onClick="openReg()" class="header-text-btn no-underline transparent-bg">@Model.IndexViewModel.HeaderTextBtnsNames["courses"]</button>
+            <button onClick="openReg()" class="header-text-btn no-underline transparent-bg">@Model.IndexViewModel.HeaderTextBtnsNames["support"]</button>
+        }
+    </div>
+	<div class="index-logo-container">
+      <img src="~/imgs/icons/logo.png" class="index-logo">
+	  <span class="index-logo-text">EducatITion</span>
+	</div>
+    <div class="header-icon-btns-container">
+      @if (Model.IndexViewModel.IsLoggedIn)
+      {
+        <a class="header-icon-btn-ref" href="@Url.Action("Index", "Home", new { localization = Localization.ru } )"><img class="header-icon-btn" src="~/imgs/Len/RU.png"></a>
+        <a class="header-icon-btn-ref" href="@Url.Action("Index", "Home", new { localization = Localization.en } )"><img class="header-icon-btn" src="~/imgs/Len/EN.png"></a>
+        <a class="header-icon-btn-ref" href="@Url.Action("Menu", "Home", new {} )"><img class="header-icon-btn" src="~/imgs/icons/Group%2015.png"></a>
+      }
+      else
+      {
+        <button id="reg-form-open-btn" class="openModal login-header-btn header-icon-btn-ref no-underline l-btn">Зарегистрироваться</button>
+        <button id="auth-form-open-btn" class="openModal reg-header-btn header-icon-btn-ref no-underline l-btn">Войти</button>
+        <button style="display: none;" id="reg-continue-open-btn" class="openModal"></button>
+      }
+    </div>
+  </div>
+    <a href="@Url.Action("Index", "Home", new { direction = 1 })">
+  <div class='left-scroll'>
+    <img class='scroll-background' src="~/imgs/Сarousel/Ellipse%201.png">
+    <img class='scroll-arrow-left' src="~/imgs/icons/carbon_previous-filled.png">  
+  </div>
+  </a>
+  <a href="@Url.Action("Index", "Home", new { direction = -1 })">
+      <div class='right-scroll'>
+        <img class='scroll-background' src="~/imgs/Сarousel/Ellipse%202.png">
+        <img class='scroll-arrow-right' src="~/imgs/icons/carbon_next-filled.png">
+      </div>
+  </a>
+  <div class="course-title">
+    <span>
+      @Model.IndexViewModel.SelectedCourseTitle
+    </span>
+  </div>
+    <div class="left-btn-container">
+    @if (Model.IndexViewModel.IsLoggedIn)
+    {
+        <a href="@Url.Action("Catalogue", "Home")" class='no-underline'>
+          <div class='no-underline btn-container-text'>@Model.IndexViewModel.BtnsNames["buyCourse"]</div>
+        </a>
+    }
+    else
+    {
+        <a onClick="openReg()" class='transparent-bg'>
+          <div class='no-underline btn-container-text'>@Model.IndexViewModel.BtnsNames["buyCourse"]</div>
+        </a>
+    }
+  </div>
+    <div class='right-btn-container btn-container-text'>
+        <div>@Model.IndexViewModel.BtnsNames["teacher"]</div>
+  </div>
+  <div class="footer">
+    <img class="footer-background" src="~/imgs/footer/Footer.png">
+	<div class="credits">
+      <div class="credits-item">E-mail :Educatiton@gmail.com</div>
+      <div class="credits-item">frontend:dania25092006@gmail.com</div>
+      <div class="credits-item">backend:evgenijgejdel@gmail.com</div>
+    </div>
+  </div>
+	<div class='course-description-container'>
+		<span class='course-description-text'>
+            @Model.IndexViewModel.SelectedCourseDescription;
+		</span>
+	</div>
+    <div id="role-choose-form" class="modal" data-width="45%" data-height="50%">
+        <div class="modal-content modal-s vertical-sb-layout">
+            <form class="form-container">
+                <img src="/imgs/icons/cross.png" id="role-choose-close-cross" class='closeModal cross-img'>
+                <div class="form-els-container">
+                    <div class="logo-container">
+                        <img src="/imgs/icons/logo.png" class="logo">
+                        <span class="logo-text">EducatITion</span>
+                        <span class='description-text'>-WEBSITE WITH IT COURSES-</span>
+                    </div>
+                    <span class='form-title'><b>Зарегистрироваться как</b></span>
+                    <div class='choice-btns-container'>
+                        <button type='button' onclick="handleSave('@Role.student')" class='choice-btn'><b>@Model.IndexViewModel.StudentText</b></button>
+                        <button type='button' onclick="handleSave('@Role.teacher')" class='choice-btn'><b>@Model.IndexViewModel.TeacherText</b></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="auth-form" class="modal" data-width="45%" data-height="50%">
+        <div class="modal-content modal-s vertical-sb-layout">
+            <form method="post" class="form-container">
+                <img src="/imgs/icons/cross.png" id="enter-close-cross" class='closeModal cross-img'>
+                <div class="form-els-container">
+                    <div class="logo-container">
+                        <img src="/imgs/icons/logo.png" class="logo">
+                        <span class="logo-text">EducatITion</span>
+                        <span class='description-text'>-WEBSITE WITH IT COURSES-</span>
+                    </div>
+                    <span class='form-title'><b>Вход</b></span>
+                    <input asp-for="AuthModel.Email" type="text" class="user-input" placeholder="@Model.IndexViewModel.PlaceholdersNames["login"]">
+                    <input asp-for="AuthModel.Password" type="text" class="user-input" placeholder="@Model.IndexViewModel.PlaceholdersNames["password"]">
+                    <div class='auth-left-align'>
+                        <button type="button" class='auth-reg-ref' onclick="switchForms(this)">@Model.IndexViewModel.RegText</button>
+                    </div>
+                    <button class='continue-btn'>@Model.IndexViewModel.ContinueText</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="reg-form" class="modal" data-width="45%" data-height="75%">
+        <div class="modal-content modal-s vertical-sb-layout">
+            <form method="post" class="form-container">
+                <img src="/imgs/icons/cross.png" id="reg-close-cross" class="closeModal cross-img">
+                <div class="form-els-container">
+                    <div class="logo-container">
+                        <img src="/imgs/icons/logo.png" class="logo">
+                        <span class="logo-text">EducatITion</span>
+                        <span class="description-text">-WEBSITE WITH IT COURSES-</span>
+                    </div>
+                    <div class='form-title'><b>@Model.IndexViewModel.RegLikeText</b></div>
+                    <div class="reg-inputs-container">
+                        <input asp-for="RegModel.Name" type="text" class="user-input" placeholder="@Model.IndexViewModel.PlaceholdersNames["name"]">
+                        <input asp-for="RegModel.Email" type="text" class="user-input" placeholder="@Model.IndexViewModel.PlaceholdersNames["login"]">
+                        <input asp-for="RegModel.Password" type="text" class="user-input" placeholder="@Model.IndexViewModel.PlaceholdersNames["password"]">
+                        <input asp-for="RegModel.RepeatPassword" type="text" class="user-input" placeholder="@Model.IndexViewModel.PlaceholdersNames["repeat password"]">
+                    </div>
+                    <button class='continue-btn'>@Model.IndexViewModel.ContinueText</button>
+                    <span class='reg-agreement-text'>@Model.IndexViewModel.AgreementText</span>
+                    <button type="button" class='reg-enter-ref' onclick="switchForms(this)">@Model.IndexViewModel.EnterText</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="~/js/modalScript.js"></script>
+    <script src="~/js/indFormsSwitcher.js"></script>
+    <script src="~/js/indModalOpener.js"></script>
+    <script src="~/js/saveUserType.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+.auth-reg-ref {
+	background: transparent;
+	border: none;
+	margin-top: 1%;
+	font-size: 18px;
+	font-family: 'Gotham Pro', monospace;
+	font-style: italic;
+	font-weight: 400;
+	text-decoration-line: underline;
+}
+
+.auth-left-align {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 90%;
+}

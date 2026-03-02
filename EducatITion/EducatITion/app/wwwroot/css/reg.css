@@ -1,0 +1,32 @@
+.reg-inputs-container {
+	display: flex;
+	height: 30%;
+	width: 80%;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.reg-enter-ref {
+	margin-top: 2%;
+	font-size: 2vw;
+	background: transparent;
+	border: none;
+	font-family: 'Gotham Pro', monospace;
+	font-style: italic;
+	font-weight: 400;
+	text-decoration-line: underline;
+	word-wrap: break-word;
+}
+
+.reg-agreement-text {
+	margin-top: 2%;
+	text-align: justify;
+	color: black;
+	font-size: 0.8vw;
+	font-family: Inter;
+	font-weight: 500;
+	letter-spacing: 1.5px;
+	word-wrap: break-word;
+	width: 80%;
+}
