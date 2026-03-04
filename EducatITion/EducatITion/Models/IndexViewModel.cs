@@ -6,7 +6,8 @@
         {
             { "catalogue", "" },
             { "courses", "" },
-            { "support", "" }
+            { "support", "" },
+            { "basket", "" }
         };
 
 		public Dictionary<string, string> PlaceholdersNames = new Dictionary<string, string>
@@ -94,6 +95,7 @@
 				HeaderTextBtnsNames["catalogue"] = "Каталог";
                 HeaderTextBtnsNames["support"] = "Поддержка";
                 HeaderTextBtnsNames["courses"] = "Курсы";
+                HeaderTextBtnsNames["basket"] = "Корзина";
 
                 BtnsNames["signIn"] = "Войти";
                 BtnsNames["signUp"] = "Регистрация";
@@ -119,8 +121,9 @@
 				HeaderTextBtnsNames["catalogue"] = "Catalogue";
 				HeaderTextBtnsNames["support"] = "Support";
 				HeaderTextBtnsNames["courses"] = "Courses";
+                HeaderTextBtnsNames["basket"] = "Basket";
 
-				BtnsNames["signIn"] = "Sign In";
+                BtnsNames["signIn"] = "Sign In";
 				BtnsNames["signUp"] = "Register";
 				BtnsNames["teacher"] = "Teacher";
 				BtnsNames["buyCourse"] = "Buy Course";

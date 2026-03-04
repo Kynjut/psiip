@@ -28,6 +28,7 @@
             <a href="@Url.Action("Catalogue", "Home")" class="header-text-btn no-underline">@Model.IndexViewModel.HeaderTextBtnsNames["catalogue"]</a>
             <a href="@Url.Action("Menu", "Home", new { page = MenuPage.Сourses })" class="header-text-btn no-underline">@Model.IndexViewModel.HeaderTextBtnsNames["courses"]</a>
             <a href="@Url.Action("Menu", "Home", new { page = MenuPage.Support })" class="header-text-btn no-underline">@Model.IndexViewModel.HeaderTextBtnsNames["support"]</a>
+            <a href="@Url.Action("Cart", "Home")" class="header-text-btn no-underline">@Model.IndexViewModel.HeaderTextBtnsNames["basket"]</a>
         }
         else
         {

@@ -8,6 +8,10 @@ namespace EducatITion.DB
 		public DbSet<User> Users { get; set; }
 		public DbSet<Course> Courses { get; set; }
 
+		public DbSet<Cart> Carts { get; set; }
+
+		public DbSet<CartItem> CartItems { get; set; }
+
 		public ApplicationContext(DbContextOptions<ApplicationContext> options)
 			: base(options)
 		{

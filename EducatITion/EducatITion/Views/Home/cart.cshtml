@@ -1,0 +1,298 @@
+﻿@using EducatITion.Models
+@model CartViewModel
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="~/css/cart.css">
+    <title>@Model.Title</title>
+    <style>
+        .cart-container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 20px;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .cart-title {
+            font-size: 2em;
+            color: #333;
+        }
+        
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        
+        .cart-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .cart-item-price {
+            font-size: 1.1em;
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 30px;
+        }
+        
+        .quantity-form {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .quantity-btn {
+            padding: 5px 10px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .quantity-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-remove {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-remove:hover {
+            background: #c82333;
+        }
+        
+        .btn-clear {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-clear:hover {
+            background: #5a6268;
+        }
+        
+        .btn-checkout {
+            background: #28a745;
+            color: white;
+            font-size: 1.1em;
+            padding: 10px 30px;
+        }
+        
+        .btn-checkout:hover {
+            background: #218838;
+        }
+        
+        .btn-continue {
+            background: #007bff;
+            color: white;
+        }
+        
+        .btn-continue:hover {
+            background: #0056b3;
+        }
+        
+        .cart-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-total {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        .cart-total-price {
+            color: #007bff;
+            margin-left: 10px;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 100px 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .empty-cart-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+        
+        .empty-cart-message {
+            font-size: 1.5em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Основной контент -->
+    <div class="cart-container">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+        <div class="cart-header">
+            <h1 class="cart-title">@Model.Title</h1>
+            @if (!Model.IsEmpty)
+            {
+                <form method="post" asp-action="ClearCart">
+                    <button type="submit" class="btn btn-clear">@(Model.Title == "Корзина" ? "Очистить корзину" : "Clear Cart")</button>
+                </form>
+            }
+        </div>
+
+        @if (Model.IsEmpty)
+        {
+            <div class="empty-cart">
+                <div class="empty-cart-icon">🛒</div>
+                <div class="empty-cart-message">@Model.EmptyCartMessage</div>
+                <a href="@Url.Action("Catalogue", "Home")" class="btn btn-continue">@Model.ContinueShoppingText</a>
+            </div>
+        }
+        else
+        {
+            <div class="cart-items">
+                @foreach (var item in Model.Items)
+                {
+                    <div class="cart-item">
+                        <img src="@item.ImgPath" alt="@item.CourseName" class="cart-item-image">
+                        
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">
+                                @(Model.Title == "Корзина" ? item.CourseNameRu : item.CourseNameEn)
+                            </div>
+                            <div class="cart-item-price">@item.Price</div>
+                        </div>
+
+                        <div class="cart-item-quantity">
+                            <form method="post" asp-action="UpdateQuantity" class="quantity-form">
+                                <input type="hidden" name="courseId" value="@item.CourseId">
+                                <button type="submit" name="quantity" value="@(item.Quantity - 1)" 
+                                        class="quantity-btn" @(item.Quantity <= 1 ? "disabled" : "")>-</button>
+                                
+                                <span class="quantity-input" style="display: inline-block; line-height: 30px;">
+                                    @item.Quantity
+                                </span>
+                                
+                                <button type="submit" name="quantity" value="@(item.Quantity + 1)" 
+                                        class="quantity-btn">+</button>
+                            </form>
+                        </div>
+
+                        <div class="cart-item-actions">
+                            <form method="post" asp-action="RemoveCompletely" style="display: inline;">
+                                <input type="hidden" name="courseId" value="@item.CourseId">
+                                <button type="submit" class="btn btn-remove">@Model.RemoveButtonText</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="cart-footer">
+                <a href="@Url.Action("Catalogue", "Home")" class="btn btn-continue">@Model.ContinueShoppingText</a>
+                
+                <div class="cart-total">
+                    @(Model.Title == "Корзина" ? "Итого:" : "Total:")
+                    <span class="cart-total-price">$@Model.TotalPrice</span>
+                </div>
+
+                <form method="get" asp-action="ClearCart">
+                    <button type="submit" class="btn btn-checkout">@Model.CheckoutButtonText</button>
+                </form>
+            </div>
+        }
+    </div>
+</body>
+</html>

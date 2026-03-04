@@ -5,6 +5,7 @@ namespace EducatITion.Models
 {
     public class BaseViewModel
     {
+        public Course[] Courses;
         public string Title { get; protected set; }
         public bool IsLoggedIn { get; }
         public Role Role { get; }
@@ -30,6 +31,7 @@ namespace EducatITion.Models
         protected string[][] LoadCoursesLocalizedInfo(Localization localization, int? take = null)
         {
 			Course[] courses = _context.Courses.ToArray();
+            Courses = courses;
             take = take ?? courses.Length;
 
             courses = courses.Take((int)take).ToArray();
