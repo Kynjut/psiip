@@ -6,27 +6,23 @@ namespace EducatITion.Models
     {
         public string SearchText;
 
-        // Основные данные курсов (все)
         public string[] AllCoursesTitles { get; private set; }
         public string[] AllCoursesDescriptions { get; private set; }
         public string[] AllCoursesPrices { get; private set; }
         public CourseType[] AllCoursesTypes { get; private set; }
         public string[] AllCoursesImgPaths { get; private set; }
 
-        // Данные для текущей страницы
         public string[] CoursesTitles { get; private set; }
         public string[] CoursesDescriptions { get; private set; }
         public string[] CoursesPrices { get; private set; }
         public CourseType[] CoursesTypes { get; private set; }
         public string[] CoursesImgPaths { get; private set; }
 
-        // Свойства для пагинации
         public int CurrentPage { get; set; } = 1;
         public int TotalPages { get; private set; }
-        public int PageSize { get; private set; } = 9; // 9 курсов на странице (3x3)
+        public int PageSize { get; private set; } = 9;
         public int TotalItems { get; private set; }
 
-        // Свойства для навигации
         public bool HasPreviousPage => CurrentPage > 1;
         public bool HasNextPage => CurrentPage < TotalPages;
 
@@ -38,18 +34,15 @@ namespace EducatITion.Models
             var searched = Session.GetString("searched")?.ToLower() ?? string.Empty;
             var sort = Session.GetString("sort") ?? string.Empty;
 
-            // Получаем номер страницы из сессии или параметров
             CurrentPage = Session.GetInt32("currentPage") ?? 1;
 
             int[] indices = new int[data[0].Length];
             for (int i = 0; i < indices.Length; i++)
                 indices[i] = i;
 
-            // Сортировка
             if (sort == "true")
                 Array.Sort(data[0], indices);
 
-            // Перестановка всех массивов согласно сортировке
             string[] temp1 = data[1].ToArray();
             string[] temp2 = data[2].ToArray();
             string[] temp3 = data[3].ToArray();
@@ -63,7 +56,6 @@ namespace EducatITion.Models
                 data[4][i] = temp4[indices[i]];
             }
 
-            // Фильтрация по поиску
             if (!string.IsNullOrEmpty(searched))
             {
                 var indexesToClaim = data[0]
@@ -87,15 +79,12 @@ namespace EducatITion.Models
                 AllCoursesImgPaths = data[4];
             }
 
-            // Настройка пагинации
             TotalItems = AllCoursesTitles.Length;
             TotalPages = (int)Math.Ceiling((double)TotalItems / PageSize);
 
-            // Корректировка текущей страницы
             if (CurrentPage < 1) CurrentPage = 1;
             if (CurrentPage > TotalPages && TotalPages > 0) CurrentPage = TotalPages;
 
-            // Получение данных для текущей страницы
             int startIndex = (CurrentPage - 1) * PageSize;
             int itemsToTake = Math.Min(PageSize, TotalItems - startIndex);
 
@@ -116,7 +105,6 @@ namespace EducatITion.Models
                 CoursesImgPaths = Array.Empty<string>();
             }
 
-            // Сохраняем текущую страницу в сессии
             Session.SetInt32("currentPage", CurrentPage);
         }
 
